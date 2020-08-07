@@ -1,26 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classNames from 'classnames'
+import './App.scss';
+import Header from './components/sections/header'
+import About from './components/sections/aboutus'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  handleScroll = () => {
+    if(window.scrollY > 0) {
+      document.body.classList.add('menu-fixed')
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll)
+    return () => window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  render() {
+    return (
+      <main>
+        <Header />
+        <About />
+      </main>
+    );
+  }
 }
 
 export default App;
